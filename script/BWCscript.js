@@ -89,7 +89,7 @@ function changeStage(){
   var table = '<table><thead><tr>';
   table += '<th>Stage</th>';
   table += '<th>Score</th>';
-  table += "<th class='empathy'><img src='../resource/empathy.jpg' width='20px'> Empathy</th>";
+  table += "<th class='empathy'><img src='resource/empathy.jpg' width='20px'> Empathy</th>";
   table += "<th class='passion'><img src='resource/passion.jpg' width='20px'> Passion</th>";
   table += "<th class='stamina'><img src='resource/stamina.jpg' width='20px'> Stamina</th>";
   table += "<th class='wisdom'><img src='resource/wisdom.jpg' width='20px'> Wisdom</th>";
