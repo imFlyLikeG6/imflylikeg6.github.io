@@ -62,7 +62,7 @@ function addChapterSelect(){
   $("#chapter").append("<option value='-1'>선택</option>");
   for(var i=0; i <stages.length; i++)
   {
-    var option = "<option value='{0}'>{1}</option>'".format(i,i+1);
+    var option = "<option value='{0}'>{1}</option>".format(i,i+1);
     $("#chapter").append(option);
   }
 }
@@ -74,7 +74,7 @@ function addStageSelect(){
   $("#stage").append("<option value='-1'>선택</option>");
   for(var i=0; i <stages[chapter].length; i++)
   {
-    var option = "<option value='{0}'>{1}</option>'".format(i,stages[chapter][i]['num']);
+    var option = "<option value='{0}'>{1}</option>".format(i,stages[chapter][i]['num']);
     $("#stage").append(option);
   }
 }
