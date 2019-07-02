@@ -1,0 +1,167 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BTS World Calculator</title>
+  <script type="text/javascript" src="script/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="script/BWCscript.js"></script>
+  <style>
+    table {
+      margin: 0 auto;
+      width:100%;
+      text-align: center;
+      border-collapse: collapse;
+      border: 1px solid #d4d4d4;
+    }
+
+    tr {
+      height:50px;
+    }
+
+    th {
+      border: 1px solid #515151;
+    }
+
+    td {
+      border: 1px solid #515151;
+    }
+
+    input {
+      width:100%;
+      height:100%;
+    }
+
+
+    .empathy {
+      background: #fab9c7;
+    }
+
+    .passion {
+      background: #f9d0b7;
+    }
+
+    .stamina {
+      background: #a6efe3;
+    }
+
+    .wisdom {
+      background: #baddfa;
+    }
+
+    .member {
+      background: #e6cbe4;
+    }
+
+    em {
+      font-size:12px;
+      color:#f06179;
+    }
+
+    .submitButton {
+      width:100%;
+      height:40px;
+    }
+  </style>
+
+  <script>
+    $(document).ready(function(){
+      $("#cardInfo").hide();
+      $.ajax({
+        url: 'stage_info.csv',
+        dataType: 'text',
+        success: function(data){
+          loadStageData(data);
+          addChapterSelect();
+        }
+      });
+  	});
+  </script>
+
+</head>
+<body>
+  <form>
+    <fieldset id="selectStage">
+       <legend>Stage</legend>
+         Chapter
+         <select name="chapter" id="chapter" onChange="addStageSelect()">
+  			 </select>
+         -
+         <select name="stage" id="stage" onChange="changeStage()">
+  			 </select>
+    </fieldset>
+
+  </form>
+
+  <div id="stageInfo">
+  </div>
+
+  <br>
+  <div id="cardInfo">
+    <table>
+      <thead>
+        <tr><th> </th>
+          <th class='empathy'><img src='empathy.jpg' height='30px'></th>
+          <th class='passion'><img src='passion.jpg' height='30px'> </th>
+          <th class='stamina'><img src='stamina.jpg' height='30px'> </th>
+          <th class='wisdom'><img src='wisdom.jpg' height='30px'> </th></tr>
+      </thead>
+      <tbody>
+        <tr id="card0">
+          <th>Agency</th>
+          <td class='empathy'><input type="number" id="empathy0"></td>
+          <td class='passion'><input type="number" id="passion0"></td>
+          <td class='stamina'><input type="number" id="stamina0"></td>
+          <td class='wisdom'><input type="number" id="wisdom0"></td>
+        </tr>
+        <tr id="card1">
+          <th>Card1</th>
+          <td class='empathy'><input type="number" id="empathy1"></td>
+          <td class='passion'><input type="number" id="passion1"></td>
+          <td class='stamina'><input type="number" id="stamina1"></td>
+          <td class='wisdom'><input type="number" id="wisdom1"></td>
+        </tr>
+        <tr id="card2">
+          <th>Card2</th>
+          <th class='empathy'><input type="number" id="empathy2"></th>
+          <td class='passion'><input type="number" id="passion2"></td>
+          <td class='stamina'><input type="number" id="stamina2"></td>
+          <td class='wisdom'><input type="number" id="wisdom2"></td>
+        </tr>
+        <tr id="card3">
+          <th>Card3</th>
+          <td class='empathy'><input type="number" id="empathy3"></td>
+          <td class='passion'><input type="number" id="passion3"></td>
+          <td class='stamina'><input type="number" id="stamina3"></td>
+          <td class='wisdom'><input type="number" id="wisdom3"></td>
+        </tr>
+        <tr id="card4">
+          <th>Card4</th>
+          <td class='empathy'><input type="number" id="empathy4"></td>
+          <td class='passion'><input type="number" id="passion4"></td>
+          <td class='stamina'><input type="number" id="stamina4"></td>
+          <td class='wisdom'><input type="number" id="wisdom4"></td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <button class="submitButton" type="button" name="button" id="calc" onclick="calculate()">Challenge!</button>
+    <br>
+    <br>
+    <div id="result">
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <hr>
+  <em>
+    최첨단 수작업으로 이루워진 점수표라 실제 게임과 다를 수 있습니다.<br>
+    스테이지가 5-12밖에 없는 이유는 제가 거기까지 깼기 때문이죠.<br>
+    오류 및 점수 제보는 트위터 @imFlyLikeG6으로 쪽지 보내주세요. (찡긋-☆)<br>
+  </em>
+  <br>
+  <button class="submitButton" type="button" name="stageTableBtn" id="stageTableBtn" onclick="loadStageInfo()">Score Table</button>
+  <div id="stageTable">
+  </div>
+</body>
+</html>
