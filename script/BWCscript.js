@@ -90,9 +90,9 @@ function changeStage(){
   table += '<th>Stage</th>';
   table += '<th>Score</th>';
   table += "<th class='empathy'><img src='../resource/empathy.jpg' width='20px'> Empathy</th>";
-  table += "<th class='passion'><img src='../resource/passion.jpg' width='20px'> Passion</th>";
-  table += "<th class='stamina'><img src='../resource/stamina.jpg' width='20px'> Stamina</th>";
-  table += "<th class='wisdom'><img src='../resource/wisdom.jpg' width='20px'> Wisdom</th>";
+  table += "<th class='passion'><img src='resource/passion.jpg' width='20px'> Passion</th>";
+  table += "<th class='stamina'><img src='resource/stamina.jpg' width='20px'> Stamina</th>";
+  table += "<th class='wisdom'><img src='resource/wisdom.jpg' width='20px'> Wisdom</th>";
   table += '</tr></thead><tbody><tr>';
 
   table +=  "<td>{0}-{1}</td>".format(selectedChapter*1+1,stages[selectedChapter][selectedStage]['num']);
@@ -149,10 +149,10 @@ function loadStageInfo(data){
   table += '<th>Stage</th>';
   table += "<th class='member'>Member</th>";
   table += '<th>Score</th>';
-  table += "<th class='empathy'><img src='../resource/empathy.jpg' width='20px'></th>";
-  table += "<th class='passion'><img src='../resource/passion.jpg' width='20px'></th>";
-  table += "<th class='stamina'><img src='../resource/stamina.jpg' width='20px'></th>";
-  table += "<th class='wisdom'><img src='../resource/wisdom.jpg' width='20px'></th>";
+  table += "<th class='empathy'><img src='resource/empathy.jpg' width='20px'></th>";
+  table += "<th class='passion'><img src='resource/passion.jpg' width='20px'></th>";
+  table += "<th class='stamina'><img src='resource/stamina.jpg' width='20px'></th>";
+  table += "<th class='wisdom'><img src='resource/wisdom.jpg' width='20px'></th>";
   table += '</tr></thead><tbody>';
 
   for(var i=0; i<stages.length; i++)

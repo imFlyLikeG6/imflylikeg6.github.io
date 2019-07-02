@@ -67,7 +67,7 @@
     $(document).ready(function(){
       $("#cardInfo").hide();
       $.ajax({
-        url: 'stage_info.csv',
+        url: 'script/stage_info.csv',
         dataType: 'text',
         success: function(data){
           loadStageData(data);
@@ -100,10 +100,10 @@
     <table>
       <thead>
         <tr><th> </th>
-          <th class='empathy'><img src='empathy.jpg' height='30px'></th>
-          <th class='passion'><img src='passion.jpg' height='30px'> </th>
-          <th class='stamina'><img src='stamina.jpg' height='30px'> </th>
-          <th class='wisdom'><img src='wisdom.jpg' height='30px'> </th></tr>
+          <th class='empathy'><img src='resource/empathy.jpg' height='30px'></th>
+          <th class='passion'><img src='resource/passion.jpg' height='30px'> </th>
+          <th class='stamina'><img src='resource/stamina.jpg' height='30px'> </th>
+          <th class='wisdom'><img src='resource/wisdom.jpg' height='30px'> </th></tr>
       </thead>
       <tbody>
         <tr id="card0">
