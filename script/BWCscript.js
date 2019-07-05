@@ -30,8 +30,23 @@ String.prototype.format = function() {
     return theString;
 }
 
-function loadStoryData()
+function loadStoryData(i)
 {
+  if(storyName.length > i)
+  {
+    $.ajax({
+      url: 'script/' + storyName[i] + '_story.csv',
+      dataType: 'text',
+      success: function(data){
+        loadStageData(data);
+        loadStoryData(++i);
+      }
+    });
+  }
+  else {
+    addStorySelect();
+  }
+  /*
   for(var i = 0; i <storyName.length; i++)
   {
     var num = i;
@@ -44,6 +59,7 @@ function loadStoryData()
     });
   }
   addStorySelect();
+  */
 }
 
 function loadStageData(data){
