@@ -1,7 +1,9 @@
 var stages = [];
+var selectedStory =0;
 var selectedChapter =0;
 var selectedStage =0;
 var cardNum = 0;
+var storyName =['BTS', 'RM', 'JIN', 'SUGA', 'JHOPE', 'JIMIN', 'V', 'JUNGKOOK'];
 /*
 stages
  - num
@@ -28,7 +30,25 @@ String.prototype.format = function() {
     return theString;
 }
 
+function loadStoryData()
+{
+  for(var i = 0; i <storyName.length; i++)
+  {
+    var num = i;
+    $.ajax({
+      url: 'script/' + storyName[i] + '_story.csv',
+      dataType: 'text',
+      success: function(data){
+        loadStageData(data);
+      }
+    });
+  }
+  addStorySelect();
+}
+
 function loadStageData(data){
+  var story = stages.length;
+  stages[story] = [];
   var allRows = data.split(/\r?\n|\r/);
   var i = -1;
   var j = 0;
@@ -41,9 +61,9 @@ function loadStageData(data){
     {
       i++;
       j = 0;
-      stages[i]= [];
+      stages[story][i]= [];
     }
-    stages[i][j] =
+    stages[story][i][j] =
     {
       'card' :rowCells[1],
       'num' : rowCells[2],
@@ -58,23 +78,39 @@ function loadStageData(data){
   }
 }
 
+function addStorySelect(){
+  $("#story").append("<option value='-1'>Select</option>");
+  for(var i=0; i <storyName.length; i++)
+  {
+    var option = "<option value='{0}'>{1}</option>".format(i,storyName[i]);
+    $("#story").append(option);
+  }
+}
+
 function addChapterSelect(){
-  $("#chapter").append("<option value='-1'>선택</option>");
-  for(var i=0; i <stages.length; i++)
+  $("#chapter option").remove();
+  $("#stage option").remove();
+  selectedStory = $("#story option:selected").val();
+  if(selectedStory < 0) return;
+  $("#chapter").append("<option value='-1'>Select</option>");
+  for(var i=0; i <stages[selectedStory].length; i++)
   {
     var option = "<option value='{0}'>{1}</option>".format(i,i+1);
     $("#chapter").append(option);
   }
+
+  $("#stageTableBtn").empty();
+  $("#stageTableBtn").append(storyName[selectedStory] + " Story Score Table");
 }
 
 function addStageSelect(){
   $("#stage option").remove();
   var chapter = $("#chapter option:selected").val();
   if(chapter < 0) return;
-  $("#stage").append("<option value='-1'>선택</option>");
-  for(var i=0; i <stages[chapter].length; i++)
+  $("#stage").append("<option value='-1'>Select</option>");
+  for(var i=0; i <stages[selectedStory][chapter].length; i++)
   {
-    var option = "<option value='{0}'>{1}</option>".format(i,stages[chapter][i]['num']);
+    var option = "<option value='{0}'>{1}</option>".format(i,stages[selectedStory][chapter][i]['num']);
     $("#stage").append(option);
   }
 }
@@ -84,7 +120,8 @@ function changeStage(){
   selectedChapter = $("#chapter option:selected").val();
   selectedStage = $("#stage option:selected").val();
   if(selectedChapter < 0 || selectedStage < 0) return;
-  cardNum = stages[selectedChapter][selectedStage]['card'];
+  var stage = stages[selectedStory][selectedChapter][selectedStage];
+  cardNum = stage['card'];
 
   var table = '<table><thead><tr>';
   table += '<th>Stage</th>';
@@ -95,12 +132,12 @@ function changeStage(){
   table += "<th class='wisdom'><img src='resource/wisdom.jpg' width='20px'> Wisdom</th>";
   table += '</tr></thead><tbody><tr>';
 
-  table +=  "<td>{0}-{1}</td>".format(selectedChapter*1+1,stages[selectedChapter][selectedStage]['num']);
-  table +=  "<td>{0}</td>".format(stages[selectedChapter][selectedStage]['score']);
-  table +=  "<td class='empathy'>{0}%</td>".format(stages[selectedChapter][selectedStage]['empathy']);
-  table +=  "<td class='passion'>{0}%</td>".format(stages[selectedChapter][selectedStage]['passion']);
-  table +=  "<td class='stamina'>{0}%</td>".format(stages[selectedChapter][selectedStage]['stamina']);
-  table +=  "<td class='wisdom'>{0}%</td>".format(stages[selectedChapter][selectedStage]['wisdom']);
+  table +=  "<td>{0}-{1}</td>".format(selectedChapter*1+1,stage['num']);
+  table +=  "<td>{0}</td>".format(stage['score']);
+  table +=  "<td class='empathy'>{0}%</td>".format(stage['empathy']);
+  table +=  "<td class='passion'>{0}%</td>".format(stage['passion']);
+  table +=  "<td class='stamina'>{0}%</td>".format(stage['stamina']);
+  table +=  "<td class='wisdom'>{0}%</td>".format(stage['wisdom']);
 
   table += '</tr></tbody></table>';
   $('#stageInfo').empty();
@@ -119,10 +156,11 @@ function changeStage(){
 
 function calculate(){
   var totalScore = 0;
-  var empathyP = stages[selectedChapter][selectedStage]['empathy'];
-  var passionP = stages[selectedChapter][selectedStage]['passion'];
-  var staminaP = stages[selectedChapter][selectedStage]['stamina'];
-  var wisdomP = stages[selectedChapter][selectedStage]['wisdom'];
+  var stage = stages[selectedStory][selectedChapter][selectedStage];
+  var empathyP = stage['empathy'];
+  var passionP = stage['passion'];
+  var staminaP = stage['stamina'];
+  var wisdomP = stage['wisdom'];
   for(var i =0; i <= cardNum; i++)
   {
       totalScore += Math.floor($("#empathy"+i).val() * empathyP / 100);
@@ -134,7 +172,10 @@ function calculate(){
   $("#result").empty();
   $("#result").append('Total Score => ');
   $("#result").append(totalScore);
-  if(totalScore >= stages[selectedChapter][selectedStage]['score']){
+  if(totalScore == 0){
+    $("#result").append(" <b>Sorry! No score information! It will be updated soon!</b>");
+  }
+  else if(totalScore >= stage['score']){
     $("#result").append(' <b>Success!!!</b>');
   } else{
     $("#result").append(' <b>Fail... T_T</b>');
@@ -144,10 +185,12 @@ function calculate(){
 
 function loadStageInfo(data){
 
-  var table = "<fieldset id='stageT'> <legend>Stage Table</legend>";
+  var table = "<br><fieldset id='stageT'> <legend>";
+  table += storyName[selectedStory] + " Story ";
+  table += "Score Table</legend>";
   table += '<table><thead><tr>';
   table += '<th>Stage</th>';
-  table += "<th class='member'>Member</th>";
+  table += "<th class='member'>Item</th>";
   table += '<th>Score</th>';
   table += "<th class='empathy'><img src='resource/empathy.jpg' width='20px'></th>";
   table += "<th class='passion'><img src='resource/passion.jpg' width='20px'></th>";
@@ -155,18 +198,19 @@ function loadStageInfo(data){
   table += "<th class='wisdom'><img src='resource/wisdom.jpg' width='20px'></th>";
   table += '</tr></thead><tbody>';
 
-  for(var i=0; i<stages.length; i++)
+  for(var i=0; i<stages[selectedStory].length; i++)
   {
-    for(var j=0; j<stages[i].length; j++)
+    for(var j=0; j<stages[selectedStory][i].length; j++)
     {
+      var stage = stages[selectedStory][i][j];
       table += "<tr>";
-      table +=  "<td>{0}-{1}</td>".format(i*1+1,stages[i][j]['num']);
-      table +=  "<td class='member'>{0}</td>".format(stages[i][j]['member']);
-      table +=  "<td>{0}</td>".format(stages[i][j]['score']);
-      table +=  "<td class='empathy'>{0}%</td>".format(stages[i][j]['empathy']);
-      table +=  "<td class='passion'>{0}%</td>".format(stages[i][j]['passion']);
-      table +=  "<td class='stamina'>{0}%</td>".format(stages[i][j]['stamina']);
-      table +=  "<td class='wisdom'>{0}%</td>".format(stages[i][j]['wisdom']);
+      table +=  "<td>{0}-{1}</td>".format(i*1+1,stage['num']);
+      table +=  "<td class='member'>{0}</td>".format(stage['member']);
+      table +=  "<td>{0}</td>".format(stage['score']);
+      table +=  "<td class='empathy'>{0}%</td>".format(stage['empathy']);
+      table +=  "<td class='passion'>{0}%</td>".format(stage['passion']);
+      table +=  "<td class='stamina'>{0}%</td>".format(stage['stamina']);
+      table +=  "<td class='wisdom'>{0}%</td>".format(stage['wisdom']);
       table += "</tr>";
     }
     table += "<tr></tr>";

@@ -66,14 +66,15 @@
   <script>
     $(document).ready(function(){
       $("#cardInfo").hide();
-      $.ajax({
-        url: 'script/stage_info.csv',
-        dataType: 'text',
-        success: function(data){
-          loadStageData(data);
-          addChapterSelect();
-        }
-      });
+      loadStoryData();
+      //$.ajax({
+      //  url: 'script/stage_info.csv',
+      //  dataType: 'text',
+      //  success: function(data){
+      //    loadStageData(data);
+      //    addChapterSelect();
+      //  }
+      //});
   	});
   </script>
 
@@ -82,6 +83,9 @@
   <form>
     <fieldset id="selectStage">
        <legend>Stage</legend>
+         Story :
+         <select name="story" id="story" onChange="addChapterSelect()">
+  			 </select>
          Chapter
          <select name="chapter" id="chapter" onChange="addStageSelect()">
   			 </select>
@@ -158,11 +162,20 @@
   <em>
     -2019.07.02 KST 18:00 - 1~5챕터 추가.<br>
     -2019.07.03 KST 16:30 - 6챕터 추가. 정보주신 우아님, OnlyForViolet님 감사합니다♥<br>
-    -2019.07.03 KST 17:00 - 6챕터 박스정보 추가. 정보주신 MOJITO님 감사합니다♥<br><br>
+    -2019.07.03 KST 17:00 - 6챕터 박스정보 추가. 정보주신 MOJITO님 감사합니다♥<br>
+    <b>-2019.07.06 KST 05:00 - 어나더스토리 멤버별 1,2챕터 추가. JIN, V의 챕터2정보가 부족합니다 ㅠ_ㅠ...</b><br><br>
 
     최첨단 수작업으로 이루워진 점수표라 실제 게임과 다를 수 있습니다.<br>
-    챕터6부터는 직접 계산확인을 해보지 않았기때문에 점수계산에 오류가 있을 수 있습니다.<br>
-    오류 및 점수 제보는 트위터 @imFlyLikeG6으로 쪽지 보내주세요. (찡긋-☆)<br>
+    오류 및 점수 제보는 트위터 <b>@imFlyLikeG6</b> / 메일 <b>imlikeg6@gmail.com</b>으로 보내주세요. (찡긋-☆)<br>
+    오류제보는 카드/점수 스크린샷을 함께 주시면 빠르게 확인 가능합니다!<br><br>
+
+    <b>
+    어나더스토리의 점수&계산식 정보를 찾고있습니다!</b><br>
+    메인 필요능력 2가지 외에도 남은 두 능력의 계산 퍼센트가 다르기 때문에 제보해 주실 땐 꼭 도전 중 나오는 그룹능력치 점수를 함께 보내주세요!<br>
+    그룹능력치 점수를 보고 계산식 유추가 가능합니다 :)<br>
+    <b>I'm looking for score & calculation information for another story! </b><br>
+In addition to the two main required skills, the remaining two skills are calculated differently, so please send me your group stats when challenging!<br>
+It is possible to calculate and calculate the group ability score. :) <br>
   </em>
   <br>
   <button class="submitButton" type="button" name="stageTableBtn" id="stageTableBtn" onclick="loadStageInfo()">Score Table</button>
