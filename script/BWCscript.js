@@ -172,7 +172,7 @@ function calculate(){
   $("#result").empty();
   $("#result").append('Total Score => ');
   $("#result").append(totalScore);
-  if(totalScore == 0){
+  if(stage['score'] == 0){
     $("#result").append(" <b>Sorry! No score information! It will be updated soon!</b>");
   }
   else if(totalScore >= stage['score']){
