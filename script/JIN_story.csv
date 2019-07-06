@@ -1,4 +1,4 @@
-Chapter,Card,Stage,Score,Empathy,Passion,Stamina,Wisdom
+Chapter,Card,Stage,Score,Empathy,Passion,Stamina,Wisdom,Item
 1,1,2,2554,200,30,30,150,안경 미남
 1,1,4,3153,30,200,30,150,안경 미남
 1,1,7,3793,150,30,200,30,미모 열일
@@ -10,3 +10,7 @@ Chapter,Card,Stage,Score,Empathy,Passion,Stamina,Wisdom
 2,2,7,11734,30,200,10,170,미모 열일
 2,2,9,11968,170,10,30,200,미모 열일
 2,2,11,12201,200,30,170,10,방긋 미소
+
+3,3,1,19626,200,20,20,180,방긋 미소
+3,3,3,19984,20,180,20,200,방긋 미소
+3,3,5,20341,200,180,20,20,미모 열일
