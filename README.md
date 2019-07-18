@@ -1,5 +1,3 @@
 # BTS World Calculator
 
-Your wings are so-jung
-
-최첨단 수작업으로 이루워진 점수표라 실제 게임과 다를 수 있습니다.
+BTS World 미션클리어를 미리 시뮬레이션 해볼 수 있는 계산기 홈페이지입니다.
