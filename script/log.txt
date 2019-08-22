@@ -1,11 +1,12 @@
 <em><font color ="#8142DB">
-<b>Current data : BTS(1~7), RM(1~6), JIN(1~6), SUGA(1~5), JHOPE(1~6), JIMIN(1~5), V(1~6), JK(1~6)</b><br>
--2019.08.18 KST 18:30 - 어나더스토리 석진 챕터6 추가. 정보주신 JINIA님 감사합니다♥<br>
+<b>Current data : BTS(1~7), RM(1~6), JIN(1~6), SUGA(1~5), JHOPE(1~6), JIMIN(1~6), V(1~6), JK(1~6)</b><br>
+-2019.08.22 KST 17:00 - 어나더스토리 지민 챕터6 추가. 정보주신 onnarae le님 감사합니다♥<br>
 
 
 <details>
     <summary><u>Update Log</u></summary>
     <p>
+-2019.08.18 KST 18:30 - 어나더스토리 석진 챕터6 추가. 정보주신 JINIA님 감사합니다♥<br>
 -2019.08.15 KST 21:30 - 어나더스토리 호석 챕터6 추가. 정보주신 HopeArt님 감사합니다♥<br>
 -2019.08.09 KST 11:30 - BTS스토리 챕터7 추가. 정보주신 ワイソウ님 감사합니다♥<br>
 -2019.08.06 KST 22:00 - 어나더스토리 남준 챕터6추가. 정보주신 Nochu님 감사합니다♥<br>
